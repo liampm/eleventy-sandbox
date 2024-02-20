@@ -1,0 +1,27 @@
+[[redirects]]
+from = "/on-demand-and-regenerated/"
+to = "/.netlify/functions/cache-page"
+status = 200
+force = true
+_generated_by_eleventy_serverless = "cache-page"
+
+[[redirects]]
+from = "/on-demand/"
+to = "/.netlify/functions/on-demand"
+status = 200
+force = true
+_generated_by_eleventy_serverless = "on-demand"
+
+[[redirects]]
+from = "/ssr"
+to = "/.netlify/functions/ssr"
+status = 200
+force = true
+_generated_by_eleventy_serverless = "ssr"
+
+[[redirects]]
+from = "/build-and-regenerated/"
+to = "/.netlify/functions/cache-page"
+status = 200
+force = true
+_generated_by_eleventy_serverless = "cache-page"

@@ -1,0 +1,36 @@
+---
+title: Eleventy sandbox
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <style type="text/css">
+    body {
+      padding: 0.5em 1em;
+    }
+    .build-time {
+      font-family: mono;
+      font-size: 1.5rem;
+      text-align: center;
+    }
+    .detail {
+      max-width: 1200px;
+      margin: 2em auto;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="build-time">
+      Page build time:
+      <time datetime="{{ buildInfo.time.raw }}">
+        {{ buildInfo.time.formatted }}
+      </time>
+    </div>
+    <div class="detail">
+      {{ content | safe }}
+    </div>
+  </body>
+</html>

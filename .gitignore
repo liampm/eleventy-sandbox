@@ -1,0 +1,10 @@
+node_modules/
+
+dist/
+
+cloud/functions/on-demand/**
+!cloud/functions/on-demand/index.js
+cloud/functions/cache-page/**
+!cloud/functions/cache-page/index.js
+cloud/functions/ssr/**
+!cloud/functions/ssr/index.js

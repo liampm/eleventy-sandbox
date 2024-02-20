@@ -1,0 +1,9 @@
+---
+layout: base
+title: Generated at build time
+permalink: /
+eleventyNavigation:
+  key: Build time
+---
+This page is generated at build time and will not be regenerated.
+{{ collections.all | eleventyNavigation | eleventyNavigationToHtml | safe }}
