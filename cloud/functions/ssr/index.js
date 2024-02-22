@@ -5,18 +5,18 @@ const { EleventyServerless } = require('@11ty/eleventy')
 require('./eleventy-bundler-modules.js')
 
 async function handler(event) {
+  console.log("SSR event", event)
   let elev = new EleventyServerless('ssr', {
     path: new URL(event.rawUrl).pathname,
     query: event.multiValueQueryStringParameters || event.queryStringParameters,
     functionsDir: './cloud/functions/',
   })
-
   try {
     let [page] = await elev.getOutput()
 
     // If you want some of the data cascade available in `page.data`, use `eleventyConfig.dataFilterSelectors`.
     // Read more: https://www.11ty.dev/docs/config/#data-filter-selectors
-    console.log('Returning for SSR', page.data)
+
     return {
       statusCode: 200,
       headers: {

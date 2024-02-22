@@ -8,3 +8,5 @@ cloud/functions/cache-page/**
 !cloud/functions/cache-page/index.js
 cloud/functions/ssr/**
 !cloud/functions/ssr/index.js
+cloud/functions/cf-cache-page/**
+!cloud/functions/cf-cache-page/index.js

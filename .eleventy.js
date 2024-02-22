@@ -4,6 +4,11 @@ const eleventyNavigationPlugin = require('@11ty/eleventy-navigation')
 module.exports = eleventyConfig => {
 
   eleventyConfig.addPlugin(EleventyServerlessBundlerPlugin, {
+    name: 'cf-cache-page', // The serverless function name for the permalink object
+    functionsDir: './cloud/functions/',
+  })
+
+  eleventyConfig.addPlugin(EleventyServerlessBundlerPlugin, {
     name: 'cache-page', // The serverless function name for the permalink object
     functionsDir: './cloud/functions/',
   })
