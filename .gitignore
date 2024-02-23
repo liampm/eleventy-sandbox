@@ -10,3 +10,4 @@ cloud/functions/ssr/**
 !cloud/functions/ssr/index.js
 cloud/functions/cf-cache-page/**
 !cloud/functions/cf-cache-page/index.js
+!cloud/functions/cf-cache-page/wrangler.toml
