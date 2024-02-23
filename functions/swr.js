@@ -1,4 +1,4 @@
-const { EleventyServerless } = require('@11ty/eleventy')
+import { EleventyServerless } from '@11ty/eleventy'
 
 const SWR_TTL = 60 * 1000 // Our static pages will be re-rendered every 60 seconds
 
