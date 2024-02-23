@@ -45,16 +45,16 @@ const render = async (event) => {
 
 
 // This function renders a page and stores it to KV with additional metadata
-const renderAndStorePage = async (context, key) => {
+const renderAndStorePage = async (request, environment, context, key) => {
   try {
     // This part is framework-specific.
     // Your favourite framework will render the page
     // based on the request path
-    const rendered = await render(context.request)
+    const rendered = await render(request)
     if (rendered) {
       if (rendered.statusCode >= 200 && rendered.statusCode < 300) {
         context.waitUntil(
-          context.env.__STATIC_CONTENT.put(key, rendered.body, {
+          environment.__STATIC_CONTENT.put(key, rendered.body, {
             metadata: {
               createdAt: Date.now(),
             },
@@ -76,12 +76,12 @@ const renderAndStorePage = async (context, key) => {
   return null
 }
 
-async function serve(path, context) {
+async function serve(request, environment, path, context) {
   const key = path.replace(/^\/+/, '')
 
   // Try to serve a static asset from KV
   try {
-    const result = await context.env.__STATIC_CONTENT.getWithMetadata(key)
+    const result = await environment.__STATIC_CONTENT.getWithMetadata(key)
     if (result && result.value) {
       if (
         // TODO: Determine if request is for a page
@@ -89,7 +89,7 @@ async function serve(path, context) {
       ) {
         // https://developers.cloudflare.com/workers/runtime-apis/handlers/fetch/#contextwaituntil
         context.waitUntil(
-          renderAndStorePage(context.request, context.env, context, key),
+          renderAndStorePage(request, environment, context, key),
         )
       }
       return new Response(result.value)
@@ -99,14 +99,16 @@ async function serve(path, context) {
   }
 
   // Fall back to app rendering
-  const response = await renderAndStorePage(context, key)
+  const response = await renderAndStorePage(request, environment, context, key)
   return response || new Response('Not found', { status: 404 })
 }
 
-export async function onRequest(context) {
-  const url = new URL(context.request.url)
+export default {
+  async fetch(request, env, ctx) {
+    const url = new URL(request.url)
 
-  // Remove leading slashes
-  const pathname = url.pathname
-  return await serve(pathname, context)
+    // Remove leading slashes
+    const pathname = url.pathname
+    return await serve(request, env, pathname, context)
+  },
 }
